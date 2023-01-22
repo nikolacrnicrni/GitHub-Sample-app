@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id "org.jlleitschuh.gradle.ktlint" version "11.0.0"
 }
 
 android {
@@ -31,6 +32,26 @@ android {
         jvmTarget = '1.8'
     }
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+
+ktlint {
+    android = true
+    debug = true
+    ignoreFailures = true
+    disabledRules = ["no-wildcard-imports"]
+    reporters {
+        reporter "plain"
+        reporter "checkstyle"
+        reporter "sarif"
+    }
+    filter {
+        exclude("**/style-violations.kt")
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
+}
+
 
 dependencies {
 
