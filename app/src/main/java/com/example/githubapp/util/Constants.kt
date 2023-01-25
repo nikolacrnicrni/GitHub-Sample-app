@@ -7,4 +7,5 @@ object Constants {
     const val PAGE_SIZE = 20
     const val PAGE = 1
     const val EMPTY = ""
+    const val NUM_TABS = 2
 }

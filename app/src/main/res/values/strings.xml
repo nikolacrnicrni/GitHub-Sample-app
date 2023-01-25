@@ -3,4 +3,5 @@
     <string name="error_unknown">Unknown error</string>
     <string name="error_couldnt_reach_server">Can\'t reach searver</string>
     <string name="oops_something_went_wrong">Oops, something went wrong</string>
+    <string name="search_for_repositories">Search for repositories</string>
 </resources>
