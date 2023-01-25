@@ -12,21 +12,26 @@ data class GitRepo(
     val forks_count: Int,
     val updatedAt: String,
     val fullName: String,
-    val stargazersCount: Int
+    val stargazersCount: Int,
+    val nodeId: String,
+    val ownerId: Int,
+    val owner: Owner
 ) {
     companion object {
         fun GitRepo.toRepositoryEntity(): RepositoryEntity {
             return RepositoryEntity(
                 id = id,
                 name = name,
-                full_name = fullName,
-                html_url = htmlUrl,
+                fullName = fullName,
+                htmlUrl = htmlUrl,
                 updatedAt = updatedAt,
                 stargazersCount = stargazersCount,
                 watchersCount = watchersCount,
-                htmlUrl = htmlUrl,
                 forksCount = forksCount,
                 openIssuesCount = openIssuesCount,
+                nodeId = nodeId,
+                ownerId = ownerId,
+                owner = owner.toOwner()
             )
         }
     }

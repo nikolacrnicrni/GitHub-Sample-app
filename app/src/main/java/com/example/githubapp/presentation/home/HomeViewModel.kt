@@ -6,12 +6,14 @@ import com.example.githubapp.domain.model.GitRepo
 import com.example.githubapp.domain.use_case.repositories.GetGitRepoUseCase
 import com.example.githubapp.util.Constants
 import com.example.githubapp.util.Constants.EMPTY
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
+@HiltViewModel
 class HomeViewModel @Inject constructor(
-    val gitRepoUseCase: GetGitRepoUseCase
+    private val gitRepoUseCase: GetGitRepoUseCase
 ) : ViewModel() {
     private val disposable = CompositeDisposable()
 
@@ -22,7 +24,7 @@ class HomeViewModel @Inject constructor(
         searchRepository()
     }
 
-    private fun searchRepository(query: String = EMPTY,) {
+    fun searchRepository(query: String = EMPTY) {
         _state.postValue(GitHubRepoState.GitHubRepoStateIsLoading)
         disposable.add(
             gitRepoUseCase(

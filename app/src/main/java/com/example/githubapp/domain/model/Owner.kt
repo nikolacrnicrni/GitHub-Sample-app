@@ -1,27 +1,23 @@
-package com.example.githubapp.data.local.entitiy
+package com.example.githubapp.domain.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.example.githubapp.domain.model.Owner
+import com.example.githubapp.data.local.entitiy.OwnerEntity
 
-@Entity(tableName = "owners")
-data class OwnerEntity(
-    @PrimaryKey val ownerId: Int,
+data class Owner(
+    val id: Int,
     val login: String,
-    @ColumnInfo(name = "ownerNodeId") val nodeId: String,
+    val nodeId: String,
     val avatarUrl: String,
     val followersUrl: String,
     val followingUrl: String,
     val gravatarId: String,
-    @ColumnInfo(name = "ownerHtmlUrl") val htmlUrl: String,
+    val htmlUrl: String,
     val reposUrl: String,
     val type: String,
     val url: String
 ) {
-    fun toOwner(): Owner {
-        return Owner(
-            id = ownerId,
+    fun toOwner(): OwnerEntity {
+        return OwnerEntity(
+            ownerId = id,
             login = login,
             nodeId = nodeId,
             avatarUrl = avatarUrl,

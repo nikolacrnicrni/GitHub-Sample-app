@@ -172,7 +172,10 @@ data class ItemDto(
             fullName = fullName,
             id = id,
             updatedAt = updatedAt,
-            stargazersCount = stargazersCount
+            stargazersCount = stargazersCount,
+            ownerId = owner.id,
+            nodeId = nodeId,
+            owner = owner.toOwner()
         )
     }
 }

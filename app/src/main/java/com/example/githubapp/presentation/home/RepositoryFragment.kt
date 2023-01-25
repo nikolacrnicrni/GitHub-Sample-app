@@ -5,21 +5,64 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.githubapp.databinding.FragmentRepositoriesBinding
+import com.example.githubapp.domain.model.GitRepo
+import com.example.githubapp.presentation.home.adapters.RepositoryAdapter
+import com.jakewharton.rxbinding4.widget.textChanges
+import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.rxjava3.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
-class RepositoryFragment : Fragment() {
-    private lateinit var binding: FragmentRepositoriesBinding
+@AndroidEntryPoint
+class RepositoryFragment : Fragment(), RepoClickListener {
+    private var _binding: FragmentRepositoriesBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var disposable: Disposable
+    private lateinit var adapter: RepositoryAdapter
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
-        return binding.root
+        _binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
+        return _binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.searchRepository()
+        disposable = binding.searchField.textChanges()
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .subscribe { text ->
+                viewModel.searchRepository(text.toString())
+            }
+
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is GitHubRepoState.GitHubRepoStateSuccess -> {
+                    adapter.updateList(state.gitRepoResult)
+                }
+                else -> {
+                }
+            }
+        }
+
+        adapter = RepositoryAdapter(this)
+        binding.searchResultsList.adapter = adapter
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
+        _binding = null
+    }
+
+    override fun repoClicked(item: GitRepo) {
+        TODO("Not yet implemented")
     }
 }

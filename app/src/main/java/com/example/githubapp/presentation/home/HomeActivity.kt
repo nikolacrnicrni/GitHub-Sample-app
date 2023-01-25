@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private val tabArray = arrayOf(
         "Repositories",
         "Favorites"
@@ -20,7 +19,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
 
