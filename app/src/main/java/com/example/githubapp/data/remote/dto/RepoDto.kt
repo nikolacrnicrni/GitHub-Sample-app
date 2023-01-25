@@ -10,11 +10,10 @@ data class RepoDto(
     val items: List<ItemDto>,
     @SerializedName("total_count")
     val totalCount: Int
-){
+) {
     fun toGitRepo(): RepoSource {
         return RepoSource(
             items = items.map { it.getItems() }
         )
     }
 }
-

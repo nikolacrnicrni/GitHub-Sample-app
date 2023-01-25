@@ -1,5 +1,6 @@
 package com.example.githubapp.data.remote.dto
 
+import com.example.githubapp.data.local.entitiy.OwnerEntity
 import com.google.gson.annotations.SerializedName
 
 data class OwnerDto(
@@ -39,4 +40,22 @@ data class OwnerDto(
     val type: String,
     @SerializedName("url")
     val url: String
-)
+) {
+    companion object {
+        fun OwnerDto.toOwnerEntity(): OwnerEntity {
+            return OwnerEntity(
+                id = id,
+                login = login,
+                avatarUrl = avatarUrl,
+                followingUrl = followingUrl,
+                gravatarId = gravatarId,
+                htmlUrl = htmlUrl,
+                nodeId = nodeId,
+                reposUrl = reposUrl,
+                type = type,
+                url = url,
+                followersUrl = followersUrl,
+            )
+        }
+    }
+}

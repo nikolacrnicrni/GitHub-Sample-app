@@ -1,9 +1,10 @@
 package com.example.githubapp.util
 
-import com.example.githubapp.BuildConfig
-
 object Constants {
 
-    const val BASE_URL = BuildConfig.BASE_URL
-
+    const val BASE_URL = "https://api.github.com/"
+    const val DB_NAME = "GitHubRepo_DB"
+    const val PAGE_SIZE = 20
+    const val PAGE = 1
+    const val EMPTY = ""
 }

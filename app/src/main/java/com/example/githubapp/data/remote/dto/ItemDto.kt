@@ -160,15 +160,19 @@ data class ItemDto(
     val watchers: Int,
     @SerializedName("watchers_count")
     val watchersCount: Int
-){
+) {
     fun getItems(): GitRepo {
         return GitRepo(
             forksCount = forksCount,
             name = name,
             openIssuesCount = openIssuesCount,
-            owner = owner,
             watchersCount = watchersCount,
-            htmlUrl = htmlUrl
+            htmlUrl = htmlUrl,
+            forks_count = forksCount,
+            fullName = fullName,
+            id = id,
+            updatedAt = updatedAt,
+            stargazersCount = stargazersCount
         )
     }
 }
