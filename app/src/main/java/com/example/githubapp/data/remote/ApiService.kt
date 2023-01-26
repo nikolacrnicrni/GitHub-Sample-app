@@ -19,6 +19,9 @@ interface ApiService {
         @Field("grant_type") grantType: String?
     ): Observable<AccessToken>
 
+    @GET("user")
+    fun checkTokenValidity(@Header("Authorization") accessToken: String): Observable<Unit>
+
     @GET("search/repositories")
     fun getRepositories(
         @Query("q") q: String,

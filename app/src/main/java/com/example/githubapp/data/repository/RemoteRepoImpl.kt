@@ -98,6 +98,10 @@ class RemoteRepoImpl @Inject constructor(
         return loginApi.getNewAccessToken(code, clientId, clientSecret, redirectUri, grantType)
     }
 
+    override fun checkTokenValidity(accessToken: String): Observable<Unit> {
+        return loginApi.checkTokenValidity(accessToken)
+    }
+
     fun dispose() {
         if (::subscription.isInitialized && !subscription.isDisposed) {
             subscription.dispose()

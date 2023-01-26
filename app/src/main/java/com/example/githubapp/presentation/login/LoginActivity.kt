@@ -28,6 +28,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val prefs = getSharedPreferences(
+            BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE
+        )
 
         binding.buttonLogin.setSafeOnClickListener {
             startActivity(
@@ -37,9 +40,7 @@ class LoginActivity : AppCompatActivity() {
                 )
             )
         }
-        val prefs = getSharedPreferences(
-            BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE
-        )
+
         viewModel.stateLiveData.observe(this) {
             when (it) {
                 State.LOADING -> {
@@ -68,12 +69,17 @@ class LoginActivity : AppCompatActivity() {
         if (uri != null && uri.toString().startsWith(redirectUri)) {
             val code = uri.getQueryParameter("code")
             if (code != null) {
-                // TODO We can probably do something with this code! Show the user that we are logging them in
-
                 viewModel.getNewAccessToken(code, clientId, clientSecret, redirectUri, grantType)
-            } else {
-                // TODO Handle a missing code in the redirect URI
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    companion object {
+        fun getIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
 }

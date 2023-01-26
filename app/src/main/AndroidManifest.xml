@@ -22,12 +22,6 @@
             android:parentActivityName=".presentation.home.HomeActivity"/>
         <activity android:name="com.example.githubapp.presentation.login.LoginActivity"
             android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -38,7 +32,14 @@
                     android:host="callback"
                     android:scheme="demo"/>
             </intent-filter>
+        </activity>
+        <activity android:name="com.example.githubapp.presentation.splash.SplashScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

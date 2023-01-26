@@ -23,6 +23,10 @@ class LoginViewModel @Inject constructor(private val repository: RemoteRepo) : V
     val stateLiveData: LiveData<State>
         get() = _stateLiveData
 
+    private val _stateSplashLiveData = MutableLiveData<State>()
+    val stateSplashLiveData: LiveData<State>
+        get() = _stateSplashLiveData
+
     fun getNewAccessToken(
         code: String,
         clientId: String,
@@ -40,6 +44,19 @@ class LoginViewModel @Inject constructor(private val repository: RemoteRepo) : V
                     _stateLiveData.value = State.SUCCESS
                 }, {
                     _stateLiveData.value = State.ERROR
+                })
+        )
+    }
+
+    fun checkIfTokenValid(accessToken: String) {
+        disposables.add(
+            repository.checkTokenValidity(accessToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _stateSplashLiveData.value = State.SUCCESS
+                }, {
+                    _stateSplashLiveData.value = State.ERROR
                 })
         )
     }

@@ -30,4 +30,6 @@ interface RemoteRepo {
         redirectUri: String,
         grantType: String
     ): Observable<AccessToken>
+
+    fun checkTokenValidity(accessToken: String): Observable<Unit>
 }
