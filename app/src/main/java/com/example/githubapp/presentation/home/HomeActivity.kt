@@ -1,11 +1,12 @@
 package com.example.githubapp.presentation.home
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import com.example.githubapp.R
 import com.example.githubapp.databinding.ActivityMainBinding
 import com.example.githubapp.presentation.home.adapters.ViewPagerAdapter
@@ -70,5 +71,9 @@ class HomeActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    companion object {
+        fun getIntent(context: Context) = Intent(context, HomeActivity::class.java)
     }
 }

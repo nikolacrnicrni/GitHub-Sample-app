@@ -3,6 +3,9 @@ package com.example.githubapp.data.repository
 import com.example.githubapp.data.local.GitHubDatabase
 import com.example.githubapp.data.remote.ApiService
 import com.example.githubapp.data.remote.dto.RepoDetailDto
+import com.example.githubapp.di.LoginApi
+import com.example.githubapp.di.RepoApi
+import com.example.githubapp.domain.model.AccessToken
 import com.example.githubapp.domain.model.GitRepo
 import com.example.githubapp.domain.model.GitRepo.Companion.toRepositoryEntity
 import com.example.githubapp.domain.repository.RemoteRepo
@@ -14,7 +17,8 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import javax.inject.Inject
 
 class RemoteRepoImpl @Inject constructor(
-    private val api: ApiService,
+    @RepoApi private val api: ApiService,
+    @LoginApi private val loginApi: ApiService,
     private val db: GitHubDatabase
 ) : RemoteRepo {
 
@@ -82,6 +86,16 @@ class RemoteRepoImpl @Inject constructor(
         }
 
         return gitFavouritesRepoState
+    }
+
+    override fun getAccessToken(
+        code: String,
+        clientId: String,
+        clientSecret: String,
+        redirectUri: String,
+        grantType: String
+    ): Observable<AccessToken> {
+        return loginApi.getNewAccessToken(code, clientId, clientSecret, redirectUri, grantType)
     }
 
     fun dispose() {

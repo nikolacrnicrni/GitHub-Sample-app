@@ -17,14 +17,29 @@
         <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="true">
+        </activity>
+        <activity android:name="com.example.githubapp.presentation.details.RepoDetailsActivity"
+            android:parentActivityName=".presentation.home.HomeActivity"/>
+        <activity android:name="com.example.githubapp.presentation.login.LoginActivity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="callback"
+                    android:scheme="demo"/>
+            </intent-filter>
+
         </activity>
-        <activity android:name="com.example.githubapp.presentation.details.RepoDetailsActivity"
-            android:parentActivityName=".presentation.home.HomeActivity"/>
     </application>
 
 </manifest>

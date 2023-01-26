@@ -2,10 +2,12 @@ package com.example.githubapp.di
 
 import com.example.githubapp.data.remote.ApiService
 import com.example.githubapp.util.Constants
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Qualifier
 import javax.inject.Singleton
 import okhttp3.Call
 import okhttp3.OkHttpClient
@@ -39,10 +41,17 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory {
-        return GsonConverterFactory.create()
+    fun provideGsonBuilder(): GsonBuilder {
+        return GsonBuilder().setLenient()
     }
 
+    @Singleton
+    @Provides
+    fun provideGsonConverterFactory(gsonBuilder: GsonBuilder): GsonConverterFactory {
+        return GsonConverterFactory.create(gsonBuilder.create())
+    }
+
+    @RepoApi
     @Singleton
     @Provides
     fun provideGitHubApi(
@@ -56,4 +65,26 @@ object NetworkModule {
             .addCallAdapterFactory(rxJava3CallAdapterFactory)
             .build().create(ApiService::class.java)
     }
+    @LoginApi
+    @Singleton
+    @Provides
+    fun provideGitLoginApi(
+        httpLoggingInterceptor: Call.Factory,
+        rxJava3CallAdapterFactory: RxJava3CallAdapterFactory,
+        gsonConverterFactory: GsonConverterFactory
+    ): ApiService {
+        return Retrofit.Builder().baseUrl(Constants.BASE_URL_LOGIN)
+            .addConverterFactory(gsonConverterFactory)
+            .callFactory(httpLoggingInterceptor)
+            .addCallAdapterFactory(rxJava3CallAdapterFactory)
+            .build().create(ApiService::class.java)
+    }
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class LoginApi
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RepoApi

@@ -16,7 +16,11 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideGitRepoRepository(api: ApiService, db: GitHubDatabase): RemoteRepo {
-        return RemoteRepoImpl(api = api, db = db)
+    fun provideGitRepoRepository(
+        @RepoApi api: ApiService,
+        db: GitHubDatabase,
+        @LoginApi loginApi: ApiService
+    ): RemoteRepo {
+        return RemoteRepoImpl(api = api, db = db, loginApi = loginApi)
     }
 }
