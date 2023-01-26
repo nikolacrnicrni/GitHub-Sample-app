@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.githubapp.databinding.FragmentRepositoriesBinding
 import com.example.githubapp.domain.model.GitRepo
 import com.example.githubapp.presentation.home.adapters.RepositoryAdapter
+import com.example.githubapp.util.Constants.EMPTY
+import com.example.githubapp.util.Constants.FORKS
+import com.example.githubapp.util.Constants.STARS
+import com.example.githubapp.util.Constants.UPDATED
 import com.example.githubapp.util.extensions.showErrorSnackbar
 import com.jakewharton.rxbinding4.widget.textChanges
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +26,7 @@ class RepositoryFragment : Fragment(), RepoClickListener {
 
     private lateinit var disposable: Disposable
     private lateinit var adapter: RepositoryAdapter
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +58,23 @@ class RepositoryFragment : Fragment(), RepoClickListener {
                 }
                 else -> {
                     view.showErrorSnackbar("Offline mode!")
+                }
+            }
+        }
+
+        viewModel.sortingState.observe(viewLifecycleOwner) { sortingState ->
+            when (sortingState) {
+                SortingRepos.STARS -> {
+                    viewModel.searchRepository(binding.searchField.text.toString(), STARS)
+                }
+                SortingRepos.FORKS -> {
+                    viewModel.searchRepository(binding.searchField.text.toString(), FORKS)
+                }
+                SortingRepos.UPDATED -> {
+                    viewModel.searchRepository(binding.searchField.text.toString(), UPDATED)
+                }
+                else -> {
+                    viewModel.searchRepository(binding.searchField.text.toString(), EMPTY)
                 }
             }
         }

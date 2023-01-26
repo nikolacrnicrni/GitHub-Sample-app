@@ -6,4 +6,9 @@
     <string name="search_for_repositories">Search for repositories</string>
     <string name="repository_name">Repository Name</string>
     <string name="author_name">Author Name</string>
+    <string name="sorting">Sorting</string>
+    <string name="sort_by_stars">Sort by Stars</string>
+    <string name="sort_by_forks">Sort by Forks</string>
+    <string name="sort_by_updated">Sort by Updated</string>
+    <string name="reset_sort">Reset sort</string>
 </resources>

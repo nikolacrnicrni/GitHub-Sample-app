@@ -20,11 +20,14 @@ class HomeViewModel @Inject constructor(
     private val _state = MutableLiveData<GitHubRepoState>()
     val state: MutableLiveData<GitHubRepoState> = _state
 
+    private val _sortingState = MutableLiveData<SortingRepos>()
+    val sortingState: MutableLiveData<SortingRepos> = _sortingState
+
     init {
         searchRepository()
     }
 
-    fun searchRepository(query: String = EMPTY) {
+    fun searchRepository(query: String = EMPTY, sort: String = EMPTY) {
         _state.postValue(GitHubRepoState.GitHubRepoStateIsLoading)
         disposable.add(
             gitRepoUseCase(
@@ -32,7 +35,7 @@ class HomeViewModel @Inject constructor(
                 order = "desc",
                 perPage = Constants.PAGE_SIZE,
                 page = Constants.PAGE,
-                sort = EMPTY
+                sort = sort
             )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ repos ->
@@ -53,4 +56,8 @@ sealed class GitHubRepoState {
     data class GitHubRepoStateSuccess(val gitRepoResult: List<GitRepo>) : GitHubRepoState()
     object GitHubRepoStateError : GitHubRepoState()
     object GitHubRepoStateIsLoading : GitHubRepoState()
+}
+
+enum class SortingRepos {
+    STARS, FORKS, UPDATED, RESET
 }
