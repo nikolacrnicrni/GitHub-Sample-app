@@ -11,4 +11,16 @@
     <string name="sort_by_forks">Sort by Forks</string>
     <string name="sort_by_updated">Sort by Updated</string>
     <string name="reset_sort">Reset sort</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="open_external">Open external</string>
+    <string name="score">Score:</string>
+    <string name="language">Language:</string>
+    <string name="issues">Issues:</string>
+    <string name="forks">Forks:</string>
+    <string name="stars">Stars:</string>
+    <string name="repo_owner">Repo Owner:</string>
+    <string name="repo_name">Repo Name:</string>
+    <string name="created">Created</string>
+    <string name="updated">Updated</string>
+    <string name="repository_details">Repository Details</string>
 </resources>

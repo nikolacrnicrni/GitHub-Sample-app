@@ -20,6 +20,9 @@ interface GitHubRepositoriesDao {
     @Query("SELECT * FROM repositories ORDER BY updatedAt DESC")
     fun getRepositoriesSortedByUpdated(): Flowable<List<RepositoryEntity>>
 
+    @Query("SELECT * FROM repositories WHERE id =:repoId")
+    fun getRepositoryDetailsByRepoId(repoId: Int): List<RepositoryEntity>
+
     @Query("SELECT * FROM repositories")
     fun getRepositories(): List<RepositoryEntity>
 }

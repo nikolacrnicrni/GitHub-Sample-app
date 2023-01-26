@@ -37,7 +37,7 @@ class RepositoryAdapter(val onclick: RepoClickListener) :
         binding.repositoryIssues.text = repository.openIssuesCount.toString()
 
         holder.itemView.setSafeOnClickListener {
-            // TODO
+            onclick.repoClicked(repository)
         }
     }
 

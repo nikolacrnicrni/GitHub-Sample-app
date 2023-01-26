@@ -56,6 +56,11 @@ class RemoteRepoImpl @Inject constructor(
         return gitRepoState
     }
 
+    override fun getSpecificRepoDetail(repoId: Int): Single<List<GitRepo>> {
+        val oldRepos = db.gitHubRepositoriesDao.getRepositoryDetailsByRepoId(repoId).map { it.toGitRepo() }
+        return Single.just(oldRepos)
+    }
+
     fun dispose() {
         if (::subscription.isInitialized && !subscription.isDisposed) {
             subscription.dispose()

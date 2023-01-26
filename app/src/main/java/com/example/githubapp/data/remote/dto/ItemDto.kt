@@ -93,11 +93,9 @@ data class ItemDto(
     @SerializedName("labels_url")
     val labelsUrl: String,
     @SerializedName("language")
-    val language: String,
+    val language: String?,
     @SerializedName("languages_url")
     val languagesUrl: String,
-    @SerializedName("license")
-    val license: LicenseDto,
     @SerializedName("merges_url")
     val mergesUrl: String,
     @SerializedName("milestones_url")
@@ -175,7 +173,9 @@ data class ItemDto(
             stargazersCount = stargazersCount,
             ownerId = owner.id,
             nodeId = nodeId,
-            owner = owner.toOwner()
+            owner = owner.toOwner(),
+            language = language.toString(),
+            createdAt = createdAt
         )
     }
 }

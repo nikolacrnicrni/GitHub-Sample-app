@@ -15,6 +15,8 @@ data class RepositoryEntity(
     var stargazersCount: Int,
     var forksCount: Int,
     var openIssuesCount: Int,
+    var language: String,
+    var createdAt: String,
     var watchersCount: Int,
     var htmlUrl: String,
     @ColumnInfo(name = "repositoryHtmlUrl") var ownerId: Int,
@@ -35,7 +37,9 @@ data class RepositoryEntity(
             forks_count = forksCount,
             nodeId = nodeId,
             ownerId = ownerId,
-            owner = owner.toOwner()
+            owner = owner.toOwner(),
+            language = language,
+            createdAt = createdAt
         )
     }
 }

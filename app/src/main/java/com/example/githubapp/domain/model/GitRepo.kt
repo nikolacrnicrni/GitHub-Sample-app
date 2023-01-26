@@ -15,7 +15,9 @@ data class GitRepo(
     val stargazersCount: Int,
     val nodeId: String,
     val ownerId: Int,
-    val owner: Owner
+    val owner: Owner,
+    val language: String,
+    val createdAt: String
 ) {
     companion object {
         fun GitRepo.toRepositoryEntity(): RepositoryEntity {
@@ -31,7 +33,9 @@ data class GitRepo(
                 openIssuesCount = openIssuesCount,
                 nodeId = nodeId,
                 ownerId = ownerId,
-                owner = owner.toOwner()
+                owner = owner.toOwner(),
+                createdAt = createdAt,
+                language = language
             )
         }
     }

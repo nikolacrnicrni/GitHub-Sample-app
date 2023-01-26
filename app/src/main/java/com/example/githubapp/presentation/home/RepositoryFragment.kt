@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.githubapp.databinding.FragmentRepositoriesBinding
 import com.example.githubapp.domain.model.GitRepo
+import com.example.githubapp.presentation.details.RepoDetailsActivity
 import com.example.githubapp.presentation.home.adapters.RepositoryAdapter
 import com.example.githubapp.util.Constants.EMPTY
 import com.example.githubapp.util.Constants.FORKS
@@ -90,6 +91,6 @@ class RepositoryFragment : Fragment(), RepoClickListener {
     }
 
     override fun repoClicked(item: GitRepo) {
-        TODO("Not yet implemented")
+        startActivity(RepoDetailsActivity.getIntent(requireContext(), item.id))
     }
 }
