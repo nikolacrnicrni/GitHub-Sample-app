@@ -13,4 +13,6 @@ interface RemoteRepo {
     fun getSpecificRepoDetail(repoId: Int): Single<List<GitRepo>>
 
     fun setToFavourite(repoId: Int): Observable<Int>
+
+    fun getFavourite(): Observable<List<GitRepo>>
 }

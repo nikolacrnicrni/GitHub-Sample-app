@@ -9,11 +9,17 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface GitHubRepositoriesDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertRepositories(repositories: List<RepositoryEntity>): Completable
 
     @Update
     fun updateFavourite(repository: RepositoryEntity): Single<Int>
+
+    @Query("SELECT * FROM repositories WHERE favouriteRepo = 1")
+    fun getFavouriteRepos(): Flowable<List<RepositoryEntity>>
+
+    @Query("DELETE FROM repositories WHERE favouriteRepo != 1")
+    fun deleteRepositories(): Completable
 
     @Query("SELECT * FROM repositories WHERE id = :repositoryId")
     fun getRepositoryById(repositoryId: Int): Flowable<RepositoryEntity>

@@ -10,9 +10,8 @@ import com.example.githubapp.databinding.SearchResultItemBinding
 import com.example.githubapp.domain.model.GitRepo
 import com.example.githubapp.presentation.home.RepoClickListener
 import com.example.githubapp.util.extensions.loadImage
-import com.example.githubapp.util.extensions.setSafeOnClickListener
 
-class RepositoryAdapter(val onclick: RepoClickListener) :
+class RepositoryAdapter(var onclick: RepoClickListener?) :
     RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
 
     var repositories: MutableList<GitRepo> = mutableListOf()
@@ -36,8 +35,8 @@ class RepositoryAdapter(val onclick: RepoClickListener) :
         binding.repositoryForks.text = repository.forksCount.toString()
         binding.repositoryIssues.text = repository.openIssuesCount.toString()
 
-        holder.itemView.setSafeOnClickListener {
-            onclick.repoClicked(repository)
+        holder.itemView.setOnClickListener() {
+            onclick?.repoClicked(repository)
         }
     }
 

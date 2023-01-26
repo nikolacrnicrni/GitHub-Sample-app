@@ -9,6 +9,6 @@ object Utils {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         val outputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
         val date = inputFormat.parse(dateString)
-        return outputFormat.format(date)
+        return outputFormat.format(date!!)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.githubapp.presentation.home
+package com.example.githubapp.presentation.home.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,10 @@ import androidx.fragment.app.activityViewModels
 import com.example.githubapp.databinding.FragmentRepositoriesBinding
 import com.example.githubapp.domain.model.GitRepo
 import com.example.githubapp.presentation.details.RepoDetailsActivity
+import com.example.githubapp.presentation.home.GitHubRepoState
+import com.example.githubapp.presentation.home.HomeViewModel
+import com.example.githubapp.presentation.home.RepoClickListener
+import com.example.githubapp.presentation.home.SortingRepos
 import com.example.githubapp.presentation.home.adapters.RepositoryAdapter
 import com.example.githubapp.util.Constants.EMPTY
 import com.example.githubapp.util.Constants.FORKS
