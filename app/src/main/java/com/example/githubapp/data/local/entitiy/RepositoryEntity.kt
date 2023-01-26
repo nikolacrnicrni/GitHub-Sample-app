@@ -21,7 +21,8 @@ data class RepositoryEntity(
     var htmlUrl: String,
     @ColumnInfo(name = "repositoryHtmlUrl") var ownerId: Int,
     var nodeId: String,
-    @Embedded val owner: OwnerEntity
+    @Embedded val owner: OwnerEntity,
+    var favouriteRepo: Int = 0
 ) {
     fun toGitRepo(): GitRepo {
         return GitRepo(

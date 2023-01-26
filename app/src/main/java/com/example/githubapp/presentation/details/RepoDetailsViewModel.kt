@@ -16,6 +16,8 @@ class RepoDetailsViewModel @Inject constructor(
 
     private val _state = MutableLiveData<GitHubRepoDetailsState>()
     val state: MutableLiveData<GitHubRepoDetailsState> = _state
+    private val _stateFav = MutableLiveData<FavouriteState>()
+    val stateFav: MutableLiveData<FavouriteState> = _stateFav
     private val disposable = CompositeDisposable()
 
     fun getRepoDetails(repoId: Int) {
@@ -29,10 +31,25 @@ class RepoDetailsViewModel @Inject constructor(
         )
     }
 
+    fun addToFavourites(repoId: Int) {
+        disposable.add(
+            remoteRepo.setToFavourite(repoId).observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _stateFav.postValue(FavouriteState.SAVED)
+                }, {
+                    _stateFav.postValue(FavouriteState.NOT)
+                })
+        )
+    }
+
     override fun onCleared() {
         disposable.clear()
         super.onCleared()
     }
+}
+
+enum class FavouriteState {
+    SAVED, NOT
 }
 
 sealed class GitHubRepoDetailsState {

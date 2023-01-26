@@ -11,4 +11,6 @@ interface RemoteRepo {
     fun getRepoDetail(owner: String, repo: String): Single<RepoDetailDto>
 
     fun getSpecificRepoDetail(repoId: Int): Single<List<GitRepo>>
+
+    fun setToFavourite(repoId: Int): Observable<Int>
 }

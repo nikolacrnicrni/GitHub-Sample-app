@@ -49,9 +49,20 @@ class RepoDetailsActivity : AppCompatActivity() {
                             )
                         )
                     }
+                    binding.addToFavoritesButton.setSafeOnClickListener {
+                        state.gitRepoResult?.id?.let { repoId -> viewModel.addToFavourites(repoId) }
+                    }
                 }
-                else -> {
+                else -> {}
+            }
+        }
+
+        viewModel.stateFav.observe(this) {
+            when (it) {
+                FavouriteState.SAVED -> {
+                    finish()
                 }
+                else -> {}
             }
         }
     }

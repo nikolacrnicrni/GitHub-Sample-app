@@ -6,6 +6,7 @@ import com.example.githubapp.data.remote.dto.RepoDetailDto
 import com.example.githubapp.domain.model.GitRepo
 import com.example.githubapp.domain.model.GitRepo.Companion.toRepositoryEntity
 import com.example.githubapp.domain.repository.RemoteRepo
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
@@ -20,6 +21,7 @@ class RemoteRepoImpl @Inject constructor(
 
     private lateinit var subscription: Disposable
     private val gitRepoState = BehaviorSubject.create<List<GitRepo>>()
+    private val gitRepoStateFavorite = BehaviorSubject.create<Int>()
 
     override fun getRepos(
         q: String,
@@ -59,6 +61,21 @@ class RemoteRepoImpl @Inject constructor(
     override fun getSpecificRepoDetail(repoId: Int): Single<List<GitRepo>> {
         val oldRepos = db.gitHubRepositoriesDao.getRepositoryDetailsByRepoId(repoId).map { it.toGitRepo() }
         return Single.just(oldRepos)
+    }
+
+    override fun setToFavourite(repoId: Int): Observable<Int> {
+        val repository = db.gitHubRepositoriesDao.getRepositoryById(repoId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                it.favouriteRepo = 1
+                db.gitHubRepositoriesDao.updateFavourite(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+                gitRepoStateFavorite.onNext(1)
+            }
+        return gitRepoStateFavorite
     }
 
     fun dispose() {

@@ -36,12 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                app:header="@string/repo_name"/>
+                app:header="@string/repo_name" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_margin="@dimen/margin_small"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small">
 
                 <ImageView
                     android:id="@+id/authorThumbImg"
@@ -85,48 +85,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                app:header="@string/stars"/>
+                app:header="@string/stars" />
 
             <com.example.githubapp.presentation.view.CustomHeaderResultView
                 android:id="@+id/repoForksResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                app:header="@string/forks"/>
+                app:header="@string/forks" />
 
             <com.example.githubapp.presentation.view.CustomHeaderResultView
                 android:id="@+id/repoIssuesResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                app:header="@string/issues"/>
+                app:header="@string/issues" />
 
             <com.example.githubapp.presentation.view.CustomHeaderResultView
                 android:id="@+id/repoLanguageResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                app:header="@string/language"/>
+                app:header="@string/language" />
 
             <com.example.githubapp.presentation.view.CustomHeaderResultView
                 android:id="@+id/repoCreatedResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                app:header="@string/created"/>
+                app:header="@string/created" />
 
             <com.example.githubapp.presentation.view.CustomHeaderResultView
                 android:id="@+id/repoUpdatedResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                app:header="@string/updated"/>
-
+                app:header="@string/updated" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_margin="@dimen/margin_small"
                 android:layout_marginTop="@dimen/margin_normal">
 
