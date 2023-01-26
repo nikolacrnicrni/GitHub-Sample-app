@@ -4,6 +4,7 @@ import com.example.githubapp.data.local.GitHubDatabase
 import com.example.githubapp.data.remote.ApiService
 import com.example.githubapp.data.remote.dto.RepoDetailDto
 import com.example.githubapp.domain.model.GitRepo
+import com.example.githubapp.domain.model.GitRepo.Companion.toRepositoryEntity
 import com.example.githubapp.domain.repository.RemoteRepo
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -17,7 +18,7 @@ class RemoteRepoImpl @Inject constructor(
     private val db: GitHubDatabase
 ) : RemoteRepo {
 
-    lateinit var subscription: Disposable
+    private lateinit var subscription: Disposable
     private val gitRepoState = BehaviorSubject.create<List<GitRepo>>()
 
     override fun getRepos(
@@ -27,7 +28,7 @@ class RemoteRepoImpl @Inject constructor(
         perPage: Int,
         page: Int
     ): Observable<List<GitRepo>> {
-        val oldComments = db.gitHubRepositoriesDao.getRepositories().map { it.toGitRepo() }
+        val oldRepos = db.gitHubRepositoriesDao.getRepositories().map { it.toGitRepo() }
         subscription = api.getRepositories(
             q = q,
             sort = sort,
@@ -38,11 +39,17 @@ class RemoteRepoImpl @Inject constructor(
             Schedulers.io()
         ).subscribe(
             { repoData ->
-                gitRepoState.onNext(repoData.toGitRepo().items)
+                db.gitHubRepositoriesDao.insertRepositories(repoData.toGitRepo().items.map { it.toRepositoryEntity() })
+                    .doOnComplete {
+                        gitRepoState.onNext(repoData.toGitRepo().items)
+                    }
+                    .doOnError {
+                        gitRepoState.onNext(oldRepos)
+                    }
+                    .subscribe()
             },
-            { throwable ->
-                gitRepoState.onNext(oldComments)
-                gitRepoState.onError(throwable)
+            {
+                gitRepoState.onNext(oldRepos)
             }
         )
 

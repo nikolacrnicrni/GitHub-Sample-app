@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Padding -->
+    <dimen name="no_padding">0dp</dimen>
+    <dimen name="padding_nav_small">2dp</dimen>
+    <dimen name="padding_nav_inset">4dp</dimen>
+    <dimen name="padding_tiny">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_inset">12dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_normal_plus">20dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="padding_xlarge">32dp</dimen>
+    <dimen name="padding_xxxlarge">48dp</dimen>
+
+    <!-- Radius -->
+    <dimen name="radius_small">4dp</dimen>
+    <dimen name="radius_medium">6dp</dimen>
+    <dimen name="radius_normal">8dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_none">0dp</dimen>
+    <dimen name="elevation_tiny">2dp</dimen>
+    <dimen name="elevation_small">4dp</dimen>
+    <dimen name="elevation_normal">8dp</dimen>
+    <dimen name="elevation_large">10dp</dimen>
+    <dimen name="elevation_xlarge">16dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="screen_margin">24dp</dimen>
+    <dimen name="margin_mini">2dp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_inset">12dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_normal_plus">20dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_large_plus">28dp</dimen>
+    <dimen name="margin_xlarge">32dp</dimen>
+    <dimen name="margin_xxlarge">40dp</dimen>
+    <dimen name="margin_xxxlarge">48dp</dimen>
+    <dimen name="margin_xxxxlarge">56dp</dimen>
+    <dimen name="margin_xxxxxlarge">64dp</dimen>
+    <dimen name="margin_xxxxxxlarge">120dp</dimen>
+
+</resources>

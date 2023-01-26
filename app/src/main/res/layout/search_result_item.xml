@@ -1,64 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_inset"
+    android:layout_marginBottom="@dimen/margin_small"
+    android:elevation="@dimen/margin_small"
+    app:cardCornerRadius="@dimen/radius_normal"
+    app:cardElevation="@dimen/elevation_small">
 
-    <ImageView
-        android:id="@+id/repository_thumbnail"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/repository_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Repository Name"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/repository_thumbnail"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/repository_thumbnail"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/repository_author"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Author Name"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/repository_thumbnail"
-        app:layout_constraintTop_toBottomOf="@+id/repository_name" />
+        <TextView
+            android:id="@+id/repository_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:text="@string/repository_name"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/repository_thumbnail"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/repository_watchers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/repository_forks"
-        app:layout_constraintTop_toBottomOf="@+id/repository_author" />
+        <TextView
+            android:id="@+id/repository_author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:text="@string/author_name"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/repository_thumbnail"
+            app:layout_constraintTop_toBottomOf="@+id/repository_name" />
 
-    <TextView
-        android:id="@+id/repository_forks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/repository_issues"
-        app:layout_constraintTop_toBottomOf="@+id/repository_author" />
+        <TextView
+            android:id="@+id/repository_watchers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            style="@style/SmallTextStyle"
+            android:layout_marginEnd="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@+id/repository_forks"
+            app:layout_constraintTop_toBottomOf="@+id/repository_author"
+            app:drawableStartCompat="@drawable/baseline_remove_red_eye_24" />
 
-    <TextView
-        android:id="@+id/repository_issues"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repository_author" />
+        <TextView
+            android:id="@+id/repository_forks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            style="@style/SmallTextStyle"
+            android:layout_marginEnd="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@+id/repository_issues"
+            app:layout_constraintTop_toBottomOf="@+id/repository_author"
+            app:drawableStartCompat="@drawable/baseline_fork_right_24" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/repository_issues"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            style="@style/SmallTextStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repository_author"
+            app:drawableStartCompat="@drawable/outline_circle_24" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

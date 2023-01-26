@@ -1,6 +1,5 @@
 package com.example.githubapp.di
 
-import com.example.githubapp.BuildConfig
 import com.example.githubapp.data.remote.ApiService
 import com.example.githubapp.util.Constants
 import dagger.Module
@@ -22,11 +21,7 @@ object NetworkModule {
     @Provides
     fun provideHttpLoggerInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BODY
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
+            HttpLoggingInterceptor.Level.BODY
         }
     }
 

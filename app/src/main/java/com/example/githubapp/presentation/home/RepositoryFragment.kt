@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.githubapp.databinding.FragmentRepositoriesBinding
 import com.example.githubapp.domain.model.GitRepo
 import com.example.githubapp.presentation.home.adapters.RepositoryAdapter
+import com.example.githubapp.util.extensions.showErrorSnackbar
 import com.jakewharton.rxbinding4.widget.textChanges
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.Disposable
@@ -43,11 +44,16 @@ class RepositoryFragment : Fragment(), RepoClickListener {
             }
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
+            binding.progressBar.root.visibility = View.GONE
             when (state) {
                 is GitHubRepoState.GitHubRepoStateSuccess -> {
                     adapter.updateList(state.gitRepoResult)
                 }
+                is GitHubRepoState.GitHubRepoStateIsLoading -> {
+                    binding.progressBar.root.visibility = View.VISIBLE
+                }
                 else -> {
+                    view.showErrorSnackbar("Offline mode!")
                 }
             }
         }

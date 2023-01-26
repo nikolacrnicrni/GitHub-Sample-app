@@ -11,4 +11,5 @@
     <color name="subtlePurple">#71658B</color>
     <color name="linkPurple">#892E7E</color>
     <color name="alertGreen">#009075</color>
+    <color name="loadingBackground">#A34A4A4A</color>
 </resources>
