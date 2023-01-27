@@ -34,7 +34,6 @@ class LoginViewModel @Inject constructor(private val repository: RemoteRepo) : V
         redirectUri: String,
         grantType: String
     ) {
-        _stateLiveData.value = State.LOADING
         disposables.add(
             repository.getAccessToken(code, clientId, clientSecret, redirectUri, grantType)
                 .subscribeOn(Schedulers.io())
@@ -61,7 +60,7 @@ class LoginViewModel @Inject constructor(private val repository: RemoteRepo) : V
         )
     }
 
-    override fun onCleared() {
+    public override fun onCleared() {
         super.onCleared()
         disposables.clear()
     }

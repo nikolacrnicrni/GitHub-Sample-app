@@ -102,12 +102,6 @@ class RemoteRepoImpl @Inject constructor(
         return loginApi.checkTokenValidity(accessToken)
     }
 
-    fun dispose() {
-        if (::subscription.isInitialized && !subscription.isDisposed) {
-            subscription.dispose()
-        }
-    }
-
     override fun getRepoDetail(owner: String, repo: String): Single<RepoDetailDto> {
         TODO("Not yet implemented")
     }
